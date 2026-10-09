@@ -45,21 +45,3 @@ document.querySelectorAll('[data-wa]').forEach(a => {
   a.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(a.dataset.wa)}`;
 });
 
-// Booking form -> WhatsApp
-document.getElementById('bk').addEventListener('submit', e => {
-  e.preventDefault();
-  const f = e.target;
-  const msg = `Hi Gaurav's Arena, I want a free trial.\nName: ${f.n.value}\nPhone: ${f.p.value}\nService: ${f.s.value}\nMessage: ${f.m.value}`;
-  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
-});
-
-// Highlight today + Open Now (India time)
-const ist = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
-const day = ist.getDay(), mins = ist.getHours() * 60 + ist.getMinutes();
-document.querySelector(`.tm tr[data-d="${day}"]`)?.classList.add('today');
-const isOpen = day === 0 || day === 6 || (mins >= 360 && mins < 1290);
-const badge = document.getElementById('open');
-badge.textContent = isOpen ? 'Open now' : 'Closed now · opens 6 am';
-badge.classList.add(isOpen ? 'on' : 'off');
-
-document.getElementById('yr').textContent = new Date().getFullYear();
